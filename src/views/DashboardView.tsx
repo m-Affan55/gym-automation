@@ -134,7 +134,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </div>
 
       {/* Quick Action Alerts Banner Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <div className="dashboard-alerts-grid">
         {/* Payment Due Alert */}
         <div style={{
           backgroundColor: 'var(--bg-card)',
@@ -221,7 +221,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </div>
 
       {/* Main Two-Column Section: Today's Activity & Membership Alerts */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '20px' }}>
+      <div className="dashboard-two-col">
         <ActivityFeed
           onViewAllAttendance={() => onSelectTab('attendance')}
           onSelectMember={onSelectMember}

@@ -272,7 +272,7 @@ export const AddMemberModal: React.FC<AddMemberModalProps> = ({
             <FileText size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div className="grid-2col-responsive">
             <div className="form-group" style={{ gridColumn: 'span 2' }}>
               <label className="form-label">Full Name *</label>
               <input

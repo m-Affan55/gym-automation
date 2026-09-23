@@ -94,7 +94,7 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div className="grid-2col-responsive">
             <div className="form-group">
               <label className="form-label">Payment Amount ({settings.currency}) *</label>
               <input

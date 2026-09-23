@@ -1,17 +1,19 @@
 import React from 'react';
-import { UserPlus, QrCode, Bell, ShieldCheck } from 'lucide-react';
+import { UserPlus, QrCode, Bell, ShieldCheck, Menu } from 'lucide-react';
 import { useGym } from '../../context/GymContext';
 
 interface HeaderProps {
   onOpenAddMember: () => void;
   onOpenScanQR: () => void;
   onSelectTab: (tab: any) => void;
+  onToggleMobileMenu?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
   onOpenAddMember, 
   onOpenScanQR,
-  onSelectTab 
+  onSelectTab,
+  onToggleMobileMenu
 }) => {
   const { admin, members, payments } = useGym();
 
@@ -27,31 +29,47 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="top-header">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Mobile Hamburger Menu Button */}
+        {onToggleMobileMenu && (
+          <button 
+            className="mobile-menu-btn"
+            onClick={onToggleMobileMenu}
+            aria-label="Open navigation menu"
+            type="button"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+
         <div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
             {getGreeting()}, <span style={{ color: 'var(--accent-red)' }}>{admin.name}</span>
           </h2>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-            Wednesday, 23 Sep 2026 &bull; <span style={{ color: 'var(--text-secondary)' }}>GymFlow Arena Lahore</span>
+          <p style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+            Wednesday, 23 Sep 2026 <span className="hide-mobile">&bull; <span style={{ color: 'var(--text-secondary)' }}>GymFlow Arena</span></span>
           </p>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '8px', 
-          padding: '6px 12px', 
-          background: 'var(--bg-card)', 
-          border: '1px solid var(--border-subtle)', 
-          borderRadius: 'var(--radius-full)',
-          fontSize: '0.78rem',
-          color: 'var(--status-active-color)'
-        }}>
-          <ShieldCheck size={14} />
-          <span>Front Desk Active</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Desk badge (hidden on mobile xs to save space) */}
+        <div 
+          className="hide-mobile"
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px', 
+            padding: '5px 10px', 
+            background: 'var(--bg-card)', 
+            border: '1px solid var(--border-subtle)', 
+            borderRadius: 'var(--radius-full)',
+            fontSize: '0.74rem',
+            color: 'var(--status-active-color)'
+          }}
+        >
+          <ShieldCheck size={13} />
+          <span>Active</span>
         </div>
 
         {/* Overdue/Expiry Notification button */}
@@ -60,31 +78,33 @@ export const Header: React.FC<HeaderProps> = ({
             className="btn btn-secondary btn-sm"
             onClick={() => onSelectTab('payments')}
             title={`${overdueCount} overdue payments, ${expiringCount} expiring memberships`}
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', padding: '6px 9px' }}
             type="button"
           >
-            <Bell size={15} style={{ color: 'var(--status-warning-color)' }} />
-            <span>{overdueCount + expiringCount} Alerts</span>
+            <Bell size={14} style={{ color: 'var(--status-warning-color)' }} />
+            <span style={{ fontSize: '0.75rem' }}>{overdueCount + expiringCount}</span>
           </button>
         )}
 
         {/* Quick QR Check-in */}
         <button 
-          className="btn btn-secondary" 
+          className="btn btn-secondary btn-sm" 
           onClick={onOpenScanQR}
           type="button"
+          style={{ padding: '7px 11px' }}
         >
-          <QrCode size={16} style={{ color: 'var(--accent-red)' }} />
-          <span>QR Check-in</span>
+          <QrCode size={15} style={{ color: 'var(--accent-red)' }} />
+          <span className="hide-mobile">QR Check-in</span>
         </button>
 
         {/* Add Member CTA */}
         <button 
-          className="btn btn-primary" 
+          className="btn btn-primary btn-sm" 
           onClick={onOpenAddMember}
           type="button"
+          style={{ padding: '7px 12px' }}
         >
-          <UserPlus size={16} />
+          <UserPlus size={15} />
           <span>Add Member</span>
         </button>
       </div>

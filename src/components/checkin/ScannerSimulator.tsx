@@ -436,7 +436,7 @@ export const ScannerSimulator: React.FC<ScannerSimulatorProps> = ({
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+        <div className="grid-simulator-responsive">
           {/* Active member simulation */}
           {activeMember && (
             <button

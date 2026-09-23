@@ -192,7 +192,7 @@ export const MemberProfileModal: React.FC<MemberProfileModalProps> = ({
         )}
 
         {/* 2-Column Grid: Left (Membership & Stats), Right (Digital QR Pass) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '20px' }}>
+        <div className="grid-profile-responsive">
           {/* Left Column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* Membership Information Card */}

@@ -17,6 +17,7 @@ import type { Member } from './types';
 const MainApp: React.FC = () => {
   const { admin, getMemberById } = useGym();
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Modal states
   const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
@@ -43,10 +44,15 @@ const MainApp: React.FC = () => {
 
   return (
     <div className="app-layout">
-      {/* Persistent Left Sidebar */}
+      {/* Sidebar with Mobile Drawer support */}
       <Sidebar 
         currentTab={currentTab} 
-        onSelectTab={setCurrentTab} 
+        onSelectTab={tab => {
+          setCurrentTab(tab);
+          setIsMobileMenuOpen(false);
+        }}
+        isOpenMobile={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Main Content Area */}
@@ -55,6 +61,7 @@ const MainApp: React.FC = () => {
           onOpenAddMember={() => setIsAddMemberOpen(true)}
           onOpenScanQR={() => setCurrentTab('checkin')}
           onSelectTab={setCurrentTab}
+          onToggleMobileMenu={() => setIsMobileMenuOpen(prev => !prev)}
         />
 
         <main className="content-viewport">

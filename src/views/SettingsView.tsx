@@ -89,7 +89,7 @@ export const SettingsView: React.FC = () => {
         </div>
 
         <form onSubmit={handleSaveSettings}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div className="grid-2col-responsive">
             <div className="form-group">
               <label className="form-label">Gym Facility Name</label>
               <input
@@ -159,7 +159,7 @@ export const SettingsView: React.FC = () => {
           </h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.85rem' }}>
+        <div className="grid-2col-responsive" style={{ fontSize: '0.85rem' }}>
           <div style={{
             backgroundColor: 'rgba(239, 68, 68, 0.05)',
             border: '1px solid rgba(239, 68, 68, 0.2)',
